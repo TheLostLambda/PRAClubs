@@ -1,0 +1,22 @@
+name:               PRAClubs
+version:            1.0.0
+cabal-version:      >= 1.8
+build-type:         Simple
+
+executable          PRAClubs
+  main-is:          Main.hs
+  other-Modules:    Logic
+  extensions:       EmptyDataDecls
+                  , FlexibleContexts
+                  , GeneralizedNewtypeDeriving
+                  , MultiParamTypeClasses
+                  , OverloadedStrings
+                  , QuasiQuotes
+                  , TemplateHaskell
+                  , TypeFamilies
+  build-depends:    base
+                  , transformers
+                  , yesod
+                  , text
+
+  ghc-options:    -fwarn-tabs -threaded -O2 -rtsopts -with-rtsopts=-N

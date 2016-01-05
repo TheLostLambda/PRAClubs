@@ -1,5 +1,5 @@
 TODO for PRAClubs:
-1. Abstact seperate pages into seperate template and haskell files.
+1. Abstact seperate pages into seperate haskell files (Also, move all non-main hs files to a new directory).
 2. Add an admin page
   * Require an admin password to access controls.
   * Allow admins to: Change club names + their min and max sizes, update admin password, reset all student data, and manually change/update entries.

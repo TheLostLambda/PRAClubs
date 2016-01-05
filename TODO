@@ -1,9 +1,10 @@
 TODO for PRAClubs:
 1. Abstact seperate pages into seperate haskell files (Also, move all non-main hs files to a new directory).
-2. Add an admin page
+2. Update combobox form so there is no need for tuple lists (See 1.4 Yesod Book and update all code to be as fresh and concise as possible). 
+3. Add an admin page
   * Require an admin password to access controls.
   * Allow admins to: Change club names + their min and max sizes, update admin password, reset all student data, and manually change/update entries.
-3. Authenticate each user and allow each user to submit their choices only once.
-4. Change the storage format of the clubs, students, and results to YAML.
-5. Regenerate results after each student submission, (rather than after every results request).
+4. Authenticate each user and allow each user to submit their choices only once.
+5. Change the storage format of the clubs, students, and results to YAML.
+6. Regenerate results after each student submission, (rather than after every results request).
 

@@ -6,8 +6,14 @@ build-type:         Simple
 executable          PRAClubs
   main-is:          Main.hs
   other-Modules:    Logic
+                  , Utils
+                  , App
+                  , Utils
+                  , Page.Form
+                  , Page.Theme
   extensions:       EmptyDataDecls
                   , FlexibleContexts
+                  , FunctionalDependencies
                   , GeneralizedNewtypeDeriving
                   , MultiParamTypeClasses
                   , OverloadedStrings

@@ -1,26 +1,5 @@
 module Logic where
-import Data.Text (Text, pack)
-import Data.List
-import System.IO.Unsafe
-
-datFile :: FilePath
-datFile = "sdntDat.txt"
-clubFile :: FilePath
-clubFile = "ClubData.txt"
-
-unJust (Just x) = x
-
-data Student = Student
-    { name    :: Text
-    , grade   :: Int
-    , choices :: [Text]
-    }
-  deriving (Show, Read, Eq)
-
-clubl :: [(Text, (Int,Int))]
-clubl = fan $ lines $ unsafePerformIO $ readFile $ clubFile
-    where fan (x:y:z:zs) = (pack x,(read y, read z)) : fan zs
-          fan _ = []
+import Utils
 
 seniorSort :: [Student] -> [Student]
 seniorSort = sortBy sortByGrade . nub

@@ -1,65 +1,19 @@
 module Main where
-import Data.Text (Text, pack)
 import Yesod
 import Logic
+import Utils
+import App
 
+import Page.Theme
+import Page.Form
 --Refactor
 --Also, run Hlint again
 
-data App = App
-
-clubs :: [(Text, Text)]
-clubs = [(x,x) | x <- map fst clubl]
-
-grades :: [(Text, Int)]
-grades = zip (map (pack . (++"th") . show) [9..12]) [9..12]
-
-mkYesod "App" [parseRoutes|
+mkYesodDispatch "App" [parseRoutes|
 /praClubs HomeR GET
 /praClubs/submitted StudentR POST
 /praClubs/results ResultR GET
 |]
-
-instance Yesod App
-
-instance RenderMessage App FormMessage where
-    renderMessage _ _ = defaultFormMessage
-
-data FStudent = FStudent
-    { sN  :: Text, sG  :: Int, sC1 :: Text, sC2 :: Text, sC3 :: Text}
-
-sdntChoicesToLst :: FStudent -> Student
-sdntChoicesToLst s = Student
-    (sN s)
-    (sG s)
-    [sC1 s, sC2 s, sC3 s]
-
-studentForm :: Html -> MForm Handler (FormResult FStudent, Widget)
-studentForm = renderDivs $ FStudent
-    <$> areq textField "Name: " Nothing
-    <*> areq (selectFieldList grades) "Grade: " Nothing
-    <*> areq (selectFieldList clubs) "First Choice Club: " Nothing
-    <*> areq (selectFieldList clubs) "Second Choice Club: " Nothing
-    <*> areq (selectFieldList clubs) "Third Choice Club: " Nothing
-
-pageTheme :: WidgetT App IO ()
-pageTheme = do
-        setTitle "PRA Club Chooser"
-        toWidgetHead
-            [hamlet|<link rel="icon" type="image/x-icon" href="http://www.prospectridgeacademy.org/favicon.ico"/>|]
-        toWidgetHead
-            [lucius|
-                .formbox {
-                    margin: auto;
-                    width: 60%;
-                    text-align: center;
-                    font-family: Verdana, Geneva, sans-serif;
-                    border: 5px ridge gold;
-                    border-radius: 25px;
-                    line-height: 200%;
-                    padding: 10px;
-                }
-            |]
 
 getHomeR :: Handler Html
 getHomeR = do

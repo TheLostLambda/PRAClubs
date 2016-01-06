@@ -5,24 +5,28 @@ build-type:         Simple
 
 executable          PRAClubs
   main-is:          Main.hs
-  other-Modules:    Logic
-                  , Utils
-                  , App
-                  , Utils
-                  , Page.Form
-                  , Page.Theme
+  other-Modules:    PRAC.Logic
+                  , PRAC.Utils
+                  , PRAC.App
+                  , PRAC.Utils
+                  , PRAC.Page.Form
+                  , PRAC.Page.Results
+                  , PRAC.Page.Theme
   extensions:       EmptyDataDecls
                   , FlexibleContexts
                   , FunctionalDependencies
                   , GeneralizedNewtypeDeriving
                   , MultiParamTypeClasses
                   , OverloadedStrings
+                  , DeriveGeneric
                   , QuasiQuotes
+                  , RecordWildCards
                   , TemplateHaskell
                   , TypeFamilies
   build-depends:    base
                   , transformers
                   , yesod
+                  , yaml
                   , text
 
   ghc-options:    -fwarn-tabs -threaded -O2 -rtsopts -with-rtsopts=-N

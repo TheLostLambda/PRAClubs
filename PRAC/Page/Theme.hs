@@ -1,7 +1,7 @@
-module Page.Theme where
+module PRAC.Page.Theme where
+import PRAC.Utils
+import PRAC.App
 import Yesod
-import Utils
-import App
 
 pageTheme :: WidgetT App IO ()
 pageTheme = do

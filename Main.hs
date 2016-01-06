@@ -1,11 +1,11 @@
 module Main where
+import PRAC.Logic
+import PRAC.Utils
+import PRAC.App
 import Yesod
-import Logic
-import Utils
-import App
 
-import Page.Theme
-import Page.Form
+import PRAC.Page.Theme
+import PRAC.Page.Form
 --Refactor
 --Also, run Hlint again
 
@@ -17,7 +17,8 @@ mkYesodDispatch "App" [parseRoutes|
 
 getHomeR :: Handler Html
 getHomeR = do
-    (widget, enctype) <- generateFormPost studentForm
+    App {..} <- getYesod
+    (widget, enctype) <- generateFormPost (studentForm clubM)
     defaultLayout $ do
         pageTheme
         [whamlet|
@@ -30,10 +31,11 @@ getHomeR = do
 
 postStudentR :: Handler Html
 postStudentR = do
-    ((result, widget), enctype) <- runFormPost studentForm
+    App {..} <- getYesod
+    ((result, widget), enctype) <- runFormPost (studentForm clubM)
     case result of
         FormSuccess student -> do
-            liftIO $ appendFile datFile (show (sdntChoicesToLst student) ++ "\n")
+            liftIO $ appendFile datFile (show (sdntChoicesToLst student) ++ "\n") --Bad! Bad Text file! Why can't you be more like your brother Yaml?
             defaultLayout $ do
                 pageTheme
                 [whamlet|
@@ -47,27 +49,31 @@ postStudentR = do
             |]
 
 getResultR :: Handler Html
-getResultR = defaultLayout $ do
+getResultR = do
+    App {..} <- getYesod
     sdntData <- liftIO $ readFile datFile
-    let res = sortAll sdntData
+    let res = sortAll sdntData clubM
         clubsl = map fst (fst res)
         unresolved = snd res
         members club = (\(Just x) -> x) $ lookup club (fst res)
-    pageTheme
-    [whamlet|
-        $forall club <- clubsl
-            <h3> #{club}:
-            <ul>
-                $forall (n, g) <- zip (map name $ members club) (map grade $ members club)
-                    <li> #{n}, #{g}th
-        $if null unresolved
-        $else
-            <h3> Unresolved:
-            <ul>
-                $forall (un, ug) <- zip (map name unresolved) (map grade unresolved)
-                    <li> #{un}, #{ug}th
-    |]
+    defaultLayout $ do
+        pageTheme
+        [whamlet|
+            $forall club <- clubsl
+                <h3> #{club}:
+                <ul>
+                    $forall (n, g) <- zip (map name $ members club) (map grade $ members club)
+                        <li> #{n}, #{g}th
+            $if null unresolved
+            $else
+                <h3> Unresolved:
+                <ul>
+                    $forall (un, ug) <- zip (map name unresolved) (map grade unresolved)
+                        <li> #{un}, #{ug}th
+        |]
 
 
 main :: IO ()
-main = warp 80 App
+main = do
+    clubLst <- decodeFile "clubData.yaml" :: IO (Maybe [Club])
+    warp 80 App {clubM = clubsToMap (fromJust clubLst)}

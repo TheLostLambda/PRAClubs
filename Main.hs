@@ -1,4 +1,5 @@
 module Main where
+import qualified Data.ByteString.Char8 as BS
 import PRAC.Logic
 import PRAC.Utils
 import PRAC.App
@@ -34,8 +35,8 @@ postStudentR = do
     App {..} <- getYesod
     ((result, widget), enctype) <- runFormPost (studentForm clubM)
     case result of
-        FormSuccess student -> do
-            liftIO $ appendFile datFile (show (sdntChoicesToLst student) ++ "\n") --Bad! Bad Text file! Why can't you be more like your brother Yaml?
+        FormSuccess fStudent -> do
+            liftIO $ BS.appendFile "sdntData.yaml" (encode fStudent)
             defaultLayout $ do
                 pageTheme
                 [whamlet|
@@ -51,8 +52,8 @@ postStudentR = do
 getResultR :: Handler Html
 getResultR = do
     App {..} <- getYesod
-    sdntData <- liftIO $ readFile datFile
-    let res = sortAll sdntData clubM
+    sdntData <- liftIO $ decodeFile "sdntData.yaml"
+    let res = sortAll (map toStudent $ fromJust sdntData) clubM
         clubsl = map fst (fst res)
         unresolved = snd res
         members club = (\(Just x) -> x) $ lookup club (fst res)
@@ -60,10 +61,12 @@ getResultR = do
         pageTheme
         [whamlet|
             $forall club <- clubsl
-                <h3> #{club}:
-                <ul>
-                    $forall (n, g) <- zip (map name $ members club) (map grade $ members club)
-                        <li> #{n}, #{g}th
+                $if null (members club)
+                $else
+                    <h3> #{club}:
+                    <ul>
+                        $forall (n, g) <- zip (map name $ members club) (map grade $ members club)
+                            <li> #{n}, #{g}th
             $if null unresolved
             $else
                 <h3> Unresolved:
@@ -72,8 +75,7 @@ getResultR = do
                         <li> #{un}, #{ug}th
         |]
 
-
 main :: IO ()
 main = do
-    clubLst <- decodeFile "clubData.yaml" :: IO (Maybe [Club])
+    clubLst <- decodeFile "clubData.yaml"
     warp 80 App {clubM = clubsToMap (fromJust clubLst)}

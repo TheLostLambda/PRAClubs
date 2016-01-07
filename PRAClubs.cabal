@@ -25,6 +25,7 @@ executable          PRAClubs
                   , TypeFamilies
   build-depends:    base
                   , transformers
+                  , bytestring
                   , yesod
                   , yaml
                   , text

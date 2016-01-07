@@ -5,10 +5,9 @@ import PRAC.Utils
 import PRAC.App
 import Yesod
 
+import PRAC.Page.Results
 import PRAC.Page.Theme
 import PRAC.Page.Form
---Refactor
---Also, run Hlint again
 
 mkYesodDispatch "App" [parseRoutes|
 /praClubs HomeR GET
@@ -19,16 +18,10 @@ mkYesodDispatch "App" [parseRoutes|
 getHomeR :: Handler Html
 getHomeR = do
     App {..} <- getYesod
-    (widget, enctype) <- generateFormPost (studentForm clubM)
+    f <- generateFormPost (studentForm clubM)
     defaultLayout $ do
         pageTheme
-        [whamlet|
-            <div .formbox>
-                <h1> Prospect Ridge Academy Club Signup
-                <form method=post action=@{StudentR} enctype=#{enctype}>
-                    ^{widget}
-                    <button>Submit
-        |]
+        formWidget f
 
 postStudentR :: Handler Html
 postStudentR = do
@@ -39,41 +32,15 @@ postStudentR = do
             liftIO $ BS.appendFile "sdntData.yaml" (encode fStudent)
             defaultLayout $ do
                 pageTheme
-                [whamlet|
-                    <div .formbox>
-                        <h1> Prospect Ridge Academy Club Signup
-                        <h3> Submitted
-                        <p> Your submission has been recieved, you're done!
-                |]
-        _ -> defaultLayout [whamlet|
-                <h1> Nice going, now look at what you have done. You messed up bad...
-            |]
+                submitSuccess
 
 getResultR :: Handler Html
 getResultR = do
     App {..} <- getYesod
     sdntData <- liftIO $ decodeFile "sdntData.yaml"
-    let res = sortAll (map toStudent $ fromJust sdntData) clubM
-        clubsl = map fst (fst res)
-        unresolved = snd res
-        members club = (\(Just x) -> x) $ lookup club (fst res)
     defaultLayout $ do
         pageTheme
-        [whamlet|
-            $forall club <- clubsl
-                $if null (members club)
-                $else
-                    <h3> #{club}:
-                    <ul>
-                        $forall (n, g) <- zip (map name $ members club) (map grade $ members club)
-                            <li> #{n}, #{g}th
-            $if null unresolved
-            $else
-                <h3> Unresolved:
-                <ul>
-                    $forall (un, ug) <- zip (map name unresolved) (map grade unresolved)
-                        <li> #{un}, #{ug}th
-        |]
+        resultsPage (fromJust sdntData) clubM
 
 main :: IO ()
 main = do

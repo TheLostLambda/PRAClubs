@@ -34,7 +34,7 @@ sortAll sdntLst clubMap = postSort clubMap $ placeStudents clubMap (seniorSort s
 
 postSort :: ClubMap -> ([(Text,[Student])], [Student]) -> ([(Text,[Student])], [Student])
 postSort clubMap dat
-    |length effectedSdnts > 0 =
+    |not (null effectedSdnts) =
         sortAll (seniorSort $ map dropChoice effectedSdnts ++ fltrOutLst effectedSdnts sdnts) clubMap
     |otherwise = dat
         where clubDat = fst dat
@@ -42,6 +42,5 @@ postSort clubMap dat
               smallClubs = filter (\(club,mbrs) -> length mbrs < clubMin club) clubDat
               sdnts = concatMap snd clubDat
               effectedSdnts = concatMap snd smallClubs
-              fltrOutLst (x:xs) res = fltrOutLst xs (filter (/=x) res)
-              fltrOutLst [] res = res
+              fltrOutLst xs res = foldl (\ res x -> filter (/= x) res) res xs
               dropChoice (Student n g (x:xs)) = Student n g xs

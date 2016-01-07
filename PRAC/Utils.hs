@@ -1,24 +1,20 @@
---Come up with a concrete purpose for this module, and rename it something more applicable.
 module PRAC.Utils
-    ( module Data.Maybe
-    , module Data.Text
-    , module Data.List
-    , module Data.Yaml
+    ( module Export
+    , Club(..)
+    , FStudent(..)
+    , Student(..)
+    , ClubMap
     , clubsToMap
     , clubsToPairs
     , grades
-    , FStudent(..)
-    , Student(..)
-    , Club(..)
-    , ClubMap
     , fromStudent
     , toStudent
     ) where
-
-import Data.Maybe (fromJust)
-import Data.Text (Text, pack)
-import Data.List
-import Data.Yaml
+import Text.Blaze as Export
+import Data.Maybe as Export (fromJust)
+import Data.Text as Export (Text, pack)
+import Data.List as Export
+import Data.Yaml as Export
 
 data Club = Club Text Int Int deriving (Show, Read, Eq)
 

@@ -11,7 +11,10 @@ resultsPage sdntDat cMap = do
             unresolved = snd res
             members club = fromJust $ lookup club (fst res)
         [whamlet|
-        <div .formbox>
+        <div .results>
+            <h1>Student Club Placement
+            <p>This page shows all current student submissions and the clubs into which they have been sorted. NOTE: These results are subject to change, and are NOT final until all student submissions have been recieved.
+            <p>Hint: To find yourself on this page, press Ctrl-f and search your name.
             $forall club <- clubsl
                 $if null (members club)
                 $else

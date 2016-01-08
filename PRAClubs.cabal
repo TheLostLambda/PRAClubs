@@ -28,6 +28,7 @@ executable          PRAClubs
                   , bytestring
                   , blaze-markup
                   , yesod
+                  , yesod-static
                   , yaml
                   , text
 

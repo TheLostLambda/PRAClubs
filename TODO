@@ -1,12 +1,8 @@
-TODO for PRAClubs:
-1. Add some type synonyms and comment and clean. Beautify code. Also run Hlint.
-2. Once the code has been beautified, improve the web pages. Do some CSS stylin'
-3. Abstract separate pages into separate Haskell files (Also, move all non-main hs files to a new directory).
-4. See 1.4 Yesod Book and update all code to be as fresh and concise as possible.
-5. Add an admin page
+Todo for PRAClubs:
+1. Regenerate results after each student submission, (rather than after every results request).
+2. Add some type synonyms and comment and clean. Beautify code.
+3. Add an admin page
   * Require an admin password to access controls.
-  * Allow admins to: Change club names + their min and max sizes, update admin password, reset all student data, and manually change/update entries.
-6. Authenticate each user and allow each user to submit their choices only once.
-7. Change the storage format of the clubs, students, and results to YAML.
-8. Add a config.yaml file. Store all configuration in this file, and have the admin page modify this file. Store this config data in the App type.
-9. Regenerate results after each student submission, (rather than after every results request).
+  * Allow admins to: Lock results (prevent new student entries), Change club names + their min and max sizes, update admin password, reset all student data, and manually change/update entries.
+4. Change the storage format of the clubs, students, and results to YAML.
+5. Add a config.yaml file. Store all configuration in this file, and have the admin page modify this file. Store this config data in the App type.

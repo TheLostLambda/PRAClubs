@@ -15,6 +15,7 @@ import Data.Maybe as Export (fromJust)
 import Data.Text as Export (Text, pack)
 import Data.List as Export
 import Data.Yaml as Export
+import Yesod.Static as Export
 
 data Club = Club Text Int Int deriving (Show, Read, Eq)
 

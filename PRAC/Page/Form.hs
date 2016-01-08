@@ -6,7 +6,7 @@ import Yesod
 studentForm :: [(Text, (Int,Int))] -> Html -> MForm Handler (FormResult FStudent, Widget)
 studentForm cMap =
     renderDivs $ FStudent
-    <$> areq textField "Name: " Nothing
+    <$> areq textField "Full Name: " Nothing
     <*> areq (selectFieldList grades) "Grade: " Nothing
     <*> areq (selectFieldList $ clubsToPairs cMap) "First Choice Club: " Nothing
     <*> areq (selectFieldList $ clubsToPairs cMap) "Second Choice Club: " Nothing
@@ -15,10 +15,11 @@ studentForm cMap =
 submitSuccess :: WidgetT App IO ()
 submitSuccess = do
     [whamlet|
-      <div .formbox>
+      <div .results>
           <h1> Prospect Ridge Academy Club Signup
           <h3> Submitted
-          <p> Your submission has been recieved, you're done!
+          <p> Your submission has been recieved!
+          <a href=@{ResultR}> See results
 |]
 
 formWidget :: (ToWidget App w,ToMarkup e) => (w, e) -> WidgetT App IO ()

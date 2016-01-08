@@ -13,6 +13,7 @@ mkYesodDispatch "App" [parseRoutes|
 /praClubs HomeR GET
 /praClubs/submitted StudentR POST
 /praClubs/results ResultR GET
+/praClubs/resources ResourceR Static resource
 |]
 
 getHomeR :: Handler Html
@@ -44,5 +45,6 @@ getResultR = do
 
 main :: IO ()
 main = do
+    res <- static "Resources/"
     clubLst <- decodeFile "clubData.yaml"
-    warp 80 App {clubM = clubsToMap (fromJust clubLst)}
+    warp 80 App {clubM = clubsToMap (fromJust clubLst), resource = res}

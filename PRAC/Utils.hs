@@ -11,6 +11,7 @@ module PRAC.Utils
     , fromStudent
     , toStudent
     ) where
+import Data.IORef as Export 
 import Text.Blaze as Export
 import Data.Maybe as Export (fromJust)
 import Data.Text as Export (Text, pack)

@@ -5,7 +5,7 @@ import Yesod
 staticFiles "Resources/"
 
 --Add config for clubMap, studentData, admin pass, static directory etc.
-data App = App { clubM :: ClubMap, resource :: Static}
+data App = App { clubM :: IORef ClubMap, adminPass :: IORef Text, resource :: Static}
 
 mkYesodData "App" [parseRoutes|
 /praClubs HomeR GET

@@ -19,7 +19,8 @@ mkYesodDispatch "App" [parseRoutes|
 getHomeR :: Handler Html
 getHomeR = do
     App {..} <- getYesod
-    f <- generateFormPost (studentForm clubM)
+    clubMap <- liftIO $ readIORef clubM
+    f <- generateFormPost (studentForm clubMap)
     defaultLayout $ do
         pageTheme
         formWidget f
@@ -27,7 +28,8 @@ getHomeR = do
 postStudentR :: Handler Html
 postStudentR = do
     App {..} <- getYesod
-    ((result, widget), enctype) <- runFormPost (studentForm clubM)
+    clubMap <- liftIO $ readIORef clubM
+    ((result, widget), enctype) <- runFormPost (studentForm clubMap)
     case result of
         FormSuccess fStudent -> do
             liftIO $ BS.appendFile "sdntData.yaml" (encode [fStudent])
@@ -38,13 +40,15 @@ postStudentR = do
 getResultR :: Handler Html
 getResultR = do
     App {..} <- getYesod
+    clubMap <- liftIO $ readIORef clubM
     sdntData <- liftIO $ decodeFile "sdntData.yaml"
     defaultLayout $ do
         pageTheme
-        resultsPage (fromJust sdntData) clubM
+        resultsPage (fromJust sdntData) clubMap
 
 main :: IO ()
 main = do
     res <- static "Resources/"
     clubLst <- decodeFile "clubData.yaml"
-    warp 80 App {clubM = clubsToMap (fromJust clubLst), resource = res}
+    clubMap <- newIORef (clubsToMap $ fromJust clubLst)
+    warp 80 App {clubM = clubMap, resource = res}

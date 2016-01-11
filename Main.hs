@@ -30,7 +30,7 @@ postStudentR = do
     ((result, widget), enctype) <- runFormPost (studentForm clubM)
     case result of
         FormSuccess fStudent -> do
-            liftIO $ BS.appendFile "sdntData.yaml" (encode fStudent)
+            liftIO $ BS.appendFile "sdntData.yaml" (encode [fStudent])
             defaultLayout $ do
                 pageTheme
                 submitSuccess

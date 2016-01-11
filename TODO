@@ -1,8 +1,6 @@
 Todo for PRAClubs:
-1. Regenerate results after each student submission, (rather than after every results request).
-2. Add some type synonyms and comment and clean. Beautify code.
-3. Add an admin page
+1. Add some type synonyms and comment and clean. Beautify code.
+2. Add an admin page
   * Require an admin password to access controls.
   * Allow admins to: Lock results (prevent new student entries), Change club names + their min and max sizes, update admin password, reset all student data, and manually change/update entries.
-4. Change the storage format of the clubs, students, and results to YAML.
-5. Add a config.yaml file. Store all configuration in this file, and have the admin page modify this file. Store this config data in the App type.
+4. Add a config.yaml file. Store all configuration in this file, and have the admin page modify this file. Store this config data in the App type.

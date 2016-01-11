@@ -19,7 +19,7 @@ updateAL al key val = case lookup key al of
     Just v -> fst spl ++ [(key,val)] ++ drop 1 (snd spl)
         where spl = span (/=(key,v)) al
 
-placeStudents :: ClubMap -> [Student] -> ([(Text,[Student])], [Student]) -> ([(Text,[Student])], [Student])
+placeStudents :: ClubMap -> [Student] -> Result -> Result
 placeStudents _ [] result = result
 placeStudents clubMap (x:xs) result@(clubMbrs, unRes)
     |length chx < 1 = placeStudents clubMap xs (clubMbrs, unRes ++ [x])
@@ -32,7 +32,7 @@ placeStudents clubMap (x:xs) result@(clubMbrs, unRes)
 
 sortAll sdntLst clubMap = postSort clubMap $ placeStudents clubMap (seniorSort sdntLst) (zip (map fst clubMap) (repeat []),[])
 
-postSort :: ClubMap -> ([(Text,[Student])], [Student]) -> ([(Text,[Student])], [Student])
+postSort :: ClubMap -> Result -> Result
 postSort clubMap dat
     |not (null effectedSdnts) =
         sortAll (seniorSort $ map dropChoice effectedSdnts ++ fltrOutLst effectedSdnts sdnts) clubMap

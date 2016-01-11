@@ -13,23 +13,23 @@ pageTheme = do
                 body {
                     background-image: url(@{ResourceR bgPattern_png});
                 }
-                .formbox {
+                .results, .formbox {
                     margin: auto;
                     width: 60%;
                     text-align: center;
                     font-family: "Comic Sans MS", cursive, sans-serif;
                     background-color: rgba(85, 85, 85, 0.4);
                     border: 10px groove gold;
-                    line-height: 200%;
                     padding: 10px;
+                    p, label {
+                        font-size: 95%;
+                    }
                 }
-                .results {
-                    margin: auto;
-                    width: 60%;
-                    text-align: center;
-                    font-family: "Comic Sans MS", cursive, sans-serif;
-                    background-color: rgba(85, 85, 85, 0.4);
-                    border: 10px groove gold;
-                    padding: 10px;
+                .formbox {
+                    line-height: 200%;
+                    label, input, select {
+                        width: 175px;
+                        display: inline-block;
+                    }
                 }
             |]

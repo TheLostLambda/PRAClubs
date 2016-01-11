@@ -4,6 +4,7 @@ module PRAC.Utils
     , FStudent(..)
     , Student(..)
     , ClubMap
+    , Result
     , clubsToMap
     , clubsToPairs
     , grades
@@ -27,7 +28,7 @@ data FStudent = FStudent
     { sN  :: Text, sG  :: Int, sC1 :: Text, sC2 :: Text, sC3 :: Text}
 
 instance ToJSON FStudent where
-    toJSON (FStudent n g f s t) = array [object ["name" .= n, "grade" .= g, "1st" .= f, "2nd" .= s, "3rd" .= t]]
+    toJSON (FStudent n g f s t) = object ["name" .= n, "grade" .= g, "1st" .= f, "2nd" .= s, "3rd" .= t]
 
 instance FromJSON FStudent where
     parseJSON (Object v) = FStudent <$> v .: "name" <*> v .: "grade" <*> v .: "1st" <*> v .: "2nd" <*> v .: "3rd"
@@ -67,3 +68,5 @@ clubsToPairs clubLst = [(x,x) | x <- map fst clubLst]
 
 grades :: [(Text, Int)]
 grades = zip (map (pack . (++"th") . show) [9..12]) [9..12]
+
+type Result = ([(Text,[Student])], [Student])

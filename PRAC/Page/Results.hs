@@ -24,7 +24,6 @@ resultsPage sdntDat cMap = do
             $if null unresolved
             $else
                 <h2> Unresolved:
-                <ul>
-                    $forall (un, ug) <- zip (map name unresolved) (map grade unresolved)
-                        <li> #{un}, #{ug}th
+                $forall (un, ug) <- zip (map name unresolved) (map grade unresolved)
+                    <p> #{un}, #{ug}th
 |]

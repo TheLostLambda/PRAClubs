@@ -17,10 +17,9 @@ submitSuccess = do
     [whamlet|
       <div .results>
           <h1> Prospect Ridge Academy Club Signup
-          <h3> Submitted
-          <p> Your submission has been recieved!
-          <a href=@{ResultR}> See results
-|]
+          <h3> Form Submitted
+          <p> Your submission has been recieved! You're done!
+    |]
 
 formWidget :: (ToWidget App w,ToMarkup e) => (w, e) -> WidgetT App IO ()
 formWidget (widget, enctype) = do

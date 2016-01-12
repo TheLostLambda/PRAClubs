@@ -1,11 +1,12 @@
 module PRAC.App where
+import qualified Data.ByteString.Char8 as BS
 import PRAC.Utils
 import Yesod
 
 staticFiles "Resources/"
 
 --Add config for clubMap, studentData, admin pass, static directory etc.
-data App = App { clubM :: IORef ClubMap, adminPass :: IORef Text, resource :: Static}
+data App = App { clubM :: IORef ClubMap, adminPass :: IORef BS.ByteString, resource :: Static}
 
 mkYesodData "App" [parseRoutes|
 /praClubs HomeR GET

@@ -28,7 +28,7 @@ pageTheme = do
                 .formbox {
                     line-height: 200%;
                     label, input, select {
-                        width: 175px;
+                        width: 200px;
                         display: inline-block;
                     }
                 }

@@ -11,7 +11,7 @@ module PRAC.Utils
     , fromStudent
     , toStudent
     ) where
-import Data.IORef as Export 
+import Data.IORef as Export
 import Text.Blaze as Export
 import Data.Maybe as Export (fromJust)
 import Data.Text as Export (Text, pack)
@@ -68,6 +68,6 @@ clubsToPairs :: ClubMap -> [(Text, Text)]
 clubsToPairs clubLst = [(x,x) | x <- map fst clubLst]
 
 grades :: [(Text, Int)]
-grades = zip (map (pack . (++"th") . show) [9..12]) [9..12]
+grades = zip (map (pack . (++"th Grade") . show) [9..12]) [9..12]
 
 type Result = ([(Text,[Student])], [Student])

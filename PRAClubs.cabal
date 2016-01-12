@@ -26,6 +26,7 @@ executable          PRAClubs
   build-depends:    base
                   , transformers
                   , bytestring
+                  , cryptohash
                   , blaze-markup
                   , yesod
                   , yesod-static

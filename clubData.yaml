@@ -1,55 +1,39 @@
-- name: Art in the Last Decade
-  minSize: 4
-  maxSize: 28
+- name: Art - Wirth
+  minSize: 5
+  maxSize: 30
 
-- name: Civics
-  minSize: 4
-  maxSize: 28
+- name: Civic Engagement - Nuss
+  minSize: 5
+  maxSize: 30
 
-- name: Crafting
-  minSize: 4
-  maxSize: 28
+- name: Crafting - Frost
+  minSize: 5
+  maxSize: 30
 
-- name: Creative Writing
-  minSize: 4
-  maxSize: 28
+- name: Creative Writing - Thomas
+  minSize: 5
+  maxSize: 30
 
-- name: Environment
-  minSize: 4
-  maxSize: 28
+- name: French - Rimmasch
+  minSize: 5
+  maxSize: 30
 
-- name: French
-  minSize: 4
-  maxSize: 28
+- name: Spanish - Karlson
+  minSize: 5
+  maxSize: 30
 
-- name: Miss Representation
-  minSize: 4
-  maxSize: 28
+- name: Miss Representation  - Ferber
+  minSize: 5
+  maxSize: 30
 
-- name: Probability and Stats
-  minSize: 4
-  maxSize: 28
+- name: Trivia - Preusser and Stancer
+  minSize: 5
+  maxSize: 30
 
-- name: Science Bowl
-  minSize: 4
-  maxSize: 28
+- name: Board Games / Chess Club - Thygesen and Wilkin
+  minSize: 5
+  maxSize: 30
 
-- name: Spanish
-  minSize: 4
-  maxSize: 28
-
-- name: Trivia
-  minSize: 4
-  maxSize: 28
-
-- name: Cerebral Games
-  minSize: 4
-  maxSize: 28
-
-- name: Chess
-  minSize: 4
-  maxSize: 28
-  
-- name: A Capella
-  minSize: 4
-  maxSize: 28
+- name: Business / Entrepreneurship - Salazar
+  minSize: 5
+  maxSize: 30

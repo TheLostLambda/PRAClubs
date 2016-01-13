@@ -1,39 +1,43 @@
 - name: Art
   minSize: 5
-  maxSize: 30
+  maxSize: 25
 
 - name: Civic Engagement
   minSize: 5
-  maxSize: 30
+  maxSize: 25
 
 - name: Crafting
   minSize: 5
-  maxSize: 30
+  maxSize: 25
 
 - name: Creative Writing
   minSize: 5
-  maxSize: 30
+  maxSize: 25
 
 - name: French
   minSize: 5
-  maxSize: 30
+  maxSize: 25
 
 - name: Spanish
   minSize: 5
-  maxSize: 30
+  maxSize: 25
 
 - name: Miss Representation
   minSize: 5
-  maxSize: 30
+  maxSize: 25
 
 - name: Trivia
   minSize: 5
-  maxSize: 30
+  maxSize: 40
+
+- name: Science Bowl
+  minSize: 5
+  maxSize: 25
 
 - name: Board Games / Chess Club
   minSize: 5
-  maxSize: 30
+  maxSize: 40
 
 - name: Business / Entrepreneurship
   minSize: 5
-  maxSize: 30
+  maxSize: 25

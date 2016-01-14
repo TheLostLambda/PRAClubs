@@ -13,7 +13,6 @@ executable          PRAClubs
                   , PRAC.Page.Results
                   , PRAC.Page.Theme
   extensions:       EmptyDataDecls
-                  , ScopedTypeVariables
                   , FlexibleContexts
                   , FunctionalDependencies
                   , GeneralizedNewtypeDeriving

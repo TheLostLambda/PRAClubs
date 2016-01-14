@@ -41,10 +41,10 @@ getResultR :: Handler Html
 getResultR = do
     App {..} <- getYesod
     clubMap <- liftIO $ readIORef clubM
-    sdntData <- liftIO $ decodeFile "sdntData.yaml"
+    sdntData <- liftIO $ return . failYaml =<< decodeFileEither "sdntData.yaml"
     defaultLayout $ do
         pageTheme
-        resultsPage (fromJust sdntData) clubMap
+        resultsPage sdntData clubMap
 
 main :: IO ()
 main = do

@@ -5,6 +5,7 @@ module PRAC.Utils
     , Student(..)
     , ClubMap
     , Result
+    , failYaml
     , clubsToMap
     , clubsToPairs
     , grades
@@ -18,6 +19,8 @@ import Data.Text as Export (Text, pack)
 import Data.List as Export
 import Data.Yaml as Export
 import Yesod.Static as Export
+
+import Control.Exception
 
 data Club = Club Text Int Int deriving (Show, Read, Eq)
 
@@ -44,6 +47,11 @@ data Student = Student
 
 instance Eq Student where
     (==) (Student n1 g1 _) (Student n2 g2 _) = n1 == n2 && g1 ==g2
+
+failYaml :: Either t [t1] -> [t1]
+failYaml val = case val of
+    Right x -> x
+    Left _ -> []
 
 fromStudent :: Student -> FStudent
 fromStudent s = FStudent
